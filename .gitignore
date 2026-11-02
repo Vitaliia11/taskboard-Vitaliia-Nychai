@@ -1,0 +1,8 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+
+# Lokalne ustawienia z danymi logowania do bazy
+appsettings.Local.json
