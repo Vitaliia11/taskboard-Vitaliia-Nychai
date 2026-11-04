@@ -8,34 +8,28 @@
 
 ### Użytkownik
 
+<!-- Pytania pomocnicze: Czego potrzebuje aplikacja, żeby Cię rozpoznać przy logowaniu?
+     Co widać w nagłówku po zalogowaniu? -->
+
 | Informacja | Przykład |
 | --- | --- |
-| Login | anna.kowalska |
-| Hasło (zapisane jako hash, nie jawnie) | $2b$10$k3J... |
-| Imię i nazwisko | Anna Kowalska |
-| Data utworzenia konta | 2026-11-02 |
+| | |
 
 ### Tablica
 
+<!-- Co było widać na liście tablic? Czy wiadomo, kto utworzył tablicę? -->
+
 | Informacja | Przykład |
 | --- | --- |
-| Nazwa | Projekt TaskBoard |
-| Opis | Zadania zespołu na demo |
-| Właściciel (użytkownik, który ją utworzył) | anna.kowalska |
-| Data utworzenia | 2026-11-02 |
+| | |
 
 ### Zadanie
 
+<!-- Co było na karcie zadania i w oknie szczegółów? Jakie wartości mogą mieć status i priorytet? -->
+
 | Informacja | Przykład |
 | --- | --- |
-| Tytuł | Uzupełnić README |
-| Opis | Dodać instrukcję uruchomienia |
-| Status | todo / in_progress / done |
-| Priorytet | low / medium / high |
-| Termin | 2026-11-13 (opcjonalny) |
-| Tablica, do której należy | Projekt TaskBoard |
-| Przypisana osoba | anna.kowalska (opcjonalna) |
-| Usunięte | false |
+| | |
 
 ## Powiązania
 
