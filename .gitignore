@@ -6,3 +6,6 @@ obj/
 
 # Lokalne ustawienia z danymi logowania do bazy
 appsettings.Local.json
+
+node_modules/
+.envs
