@@ -1,0 +1,30 @@
+SET NAMES utf8mb4;
+DROP DATABASE IF EXISTS taskboard;
+CREATE DATABASE taskboard CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci; 
+USE taskboard; 
+
+CREATE TABLE users (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ login VARCHAR(30) NOT NULL UNIQUE,
+ passwordHash CHAR (60) NOT NULL,
+ firstName VARCHAR(50) NOT NULL,
+ lastName VARCHAR(50) NOT NULL,
+ createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE boards (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(80) NOT NULL,
+ description VARCHAR(255) NULL,
+ ownerId INT UNSIGNED NOT NULL,
+ createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ isDeleted TINYINT (1) NOT NULL DEFAULT 0,
+ deletedAt DATETIME NULL,
+ deletedById INT UNSIGNED NULL,
+ FOREIGN KEY (ownerId) REFERENCES users(id),
+ FOREIGN KEY (deletedById) REFERENCES users(id) 
+);
+
+INSERT INTO boards (name, description, ownerId) VALUES
+('Aplikacja TaskBoard', 'Zadania zespolu', 1),
+('Organizacja praktyk', NULL, 2);
