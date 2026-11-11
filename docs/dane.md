@@ -45,3 +45,11 @@
   "priority": "High",
   "assignee": "Anna Nowak"
 }
+
+## Diagram ERD
+
+```mermaid
+erDiagram
+    UZYTKOWNIK ||--o{ TABLICA : tworzy
+    TABLICA ||--|{ ZADANIE : zawiera
+    UZYTKOWNIK ||--o{ ZADANIE : przypisany
