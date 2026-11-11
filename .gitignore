@@ -8,4 +8,4 @@ obj/
 appsettings.Local.json
 
 node_modules/
-.envs
+.env
