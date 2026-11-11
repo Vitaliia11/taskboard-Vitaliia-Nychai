@@ -1,27 +1,27 @@
- # TaskBoard - Aplikacja do zarządzania zadaniami
+# TaskBoard - Aplikacja do zarządzania zadaniami
 
 Aplikacja webowa typu TaskBoard przeznaczona do zarządzania projektami i zadaniami. Umożliwia tworzenie tablic, dodawanie zadań, śledzenie ich statusu oraz przypisywanie ich do użytkowników.
 
- ## Technologie
+## Technologie
 
 * **Frontend / Backend:** JavaScript / Node.js
 * **Dokumentacja:** Markdown
 * **Kontrola wersji:** Git & GitHub
 
- ## Wymagania środowiskowe
+## Wymagania środowiskowe
 
 * Node.js v18+
 * Menedżer pakietów `npm` lub `yarn`
 * Przeglądarka internetowa (Chrome, Firefox, Edge)
 
- ## Uruchomienie projektu
+## Uruchomienie projektu
 
 1. Sklonuj repozytorium na swój komputer:
 
    ```bash
    git clone <URL_TWOJEGO_REPOZYTORIUM>
 
- ## Autor
+## Autor
 
 * **Imię i Nazwisko:** VitaliiaNychai
 * **Grupa / Indeks:** 3TechnikProgramista
