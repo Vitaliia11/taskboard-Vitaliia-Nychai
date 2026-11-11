@@ -20,7 +20,8 @@ Aplikacja webowa typu TaskBoard przeznaczona do zarządzania projektami i zadani
 
    ```bash
    git clone <URL_TWOJEGO_REPOZYTORIUM>
-   
+
 ## Autor
+
 * **Imię i Nazwisko:** Vitaliia Nychai
 * **Grupa / Indeks:** 3 - Technik Programista
