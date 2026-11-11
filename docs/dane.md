@@ -1,47 +1,47 @@
 # Opis danych TaskBoard
 
-<!-- Zadanie TB-1, część 2. Skopiuj ten plik jako docs/dane.md i uzupełnij go.
-     Opisz słowami, jakie dane przechowuje aplikacja, którą widziałeś na demo.
-     Nie musisz znać SQL. Na koniec usuń komentarze z pytaniami. -->
-
 ## Co aplikacja przechowuje
 
 ### Użytkownik
 
-<!-- Pytania pomocnicze: Czego potrzebuje aplikacja, żeby Cię rozpoznać przy logowaniu?
-     Co widać w nagłówku po zalogowaniu? -->
-
 | Informacja | Przykład |
 | --- | --- |
-| | |
+| Identyfikator (ID) | `1` |
+| Adres e-mail / Login | `jan.kowalski@example.com` |
+| Imię i nazwisko w nagłówku | `Jan Kowalski` |
 
 ### Tablica
 
-<!-- Co było widać na liście tablic? Czy wiadomo, kto utworzył tablicę? -->
-
 | Informacja | Przykład |
 | --- | --- |
-| | |
+| Identyfikator (ID) tablicy | `10` |
+| Nazwa tablicy | `Projekt Zaliczeniowy` |
+| Twórca / Właściciel | `Jan Kowalski (ID: 1)` |
 
 ### Zadanie
 
-<!-- Co było na karcie zadania i w oknie szczegółów? Jakie wartości mogą mieć status i priorytet? -->
-
 | Informacja | Przykład |
 | --- | --- |
-| | |
+| Tytuł zadania | `Naprawić błąd w formularzu` |
+| Opis | `Sprawdzić walidację pól email` |
+| Status | `To Do`, `In Progress`, `Done` |
+| Priorytet | `Low`, `Medium`, `High` |
+| Przypisana osoba (Assignee) | `Anna Nowak` |
 
 ## Powiązania
 
-<!-- Opisz w co najmniej 3 zdaniach: Ile tablic może utworzyć jeden użytkownik?
-     Do ilu tablic należy jedno zadanie? Czy zadanie musi mieć przypisaną osobę? -->
+1. Jeden użytkownik może utworzyć wiele różnych tablic (relacja jeden-do-wielu pomiędzy użytkownikiem a tablicami).
+2. Jedno konkretne zadanie należy zawsze tylko do jednej określonej tablicy.
+3. Zadanie nie musi mieć przypisanej osoby — może pozostać nieprzydzielone (pole assignee może mieć wartość `null`).
 
 ## Przykład zadania w JSON
 
-<!-- Zapisz jedno zadanie tak, jak widziałeś je w DevTools albo w Postmanie podczas demo. -->
-
-```json
 {
-  "title": ""
+  "id": 101,
+  "boardId": 10,
+  "title": "Naprawić błąd w formularzu",
+  "description": "Sprawdzić walidację pól email",
+  "status": "In Progress",
+  "priority": "High",
+  "assignee": "Anna Nowak"
 }
-```
