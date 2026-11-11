@@ -53,4 +53,3 @@ erDiagram
     UZYTKOWNIK ||--o{ TABLICA : tworzy
     TABLICA ||--|{ ZADANIE : zawiera
     UZYTKOWNIK ||--o{ ZADANIE : przypisany
-    
