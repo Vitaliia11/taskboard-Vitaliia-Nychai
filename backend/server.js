@@ -10,3 +10,6 @@ app.get('/api/health',(req, res) => {
 });
 
 app.listen(3000, () => console.log('Serwer: http://localhost:3000'));
+
+app.use('/api/tasks', require('./routes/tasks'));
+app.use('/api/users', require('./routes/users'));
