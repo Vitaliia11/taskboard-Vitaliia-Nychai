@@ -28,6 +28,7 @@ Aplikacja webowa typu TaskBoard przeznaczona do zarządzania projektami i zadani
 ## Struktura bazy danych
 
 Baza danych nazywa się `taskboard` i zawiera następujące główne tablice:
+
 * `tasks` — przechowuje zadania dla tablicy.
 * `boards` — przechowuje informacje o tablicach.
 * `users` — przechowuje konta użytkowników systemu.
