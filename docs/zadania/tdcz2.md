@@ -1,26 +1,30 @@
-## Część 2 (środa): Opis danych i wstępny diagram ERD
+## Część 2 (środa): API zadań
 
 **Termin:** piątek 18:00, zmiany scalone do `main`.
 
 ### Plan dni
 
-- Środa: opis danych i wstępny diagram ERD (to zadanie).
-- Czwartek: ćwiczenia SQL w kursie SQLBolt, lekcje 1–12 (osobny PDF).
-- Piątek: przygotowanie do poniedziałku 2 (osobny PDF) i dokończenie TB-1 do 18:00.
+- Czwartek: API zadań i `GET /api/users`.
+- Piątek: walidacja, kolekcja Postman, opis bazy w README; termin 18:00.
 
 ### Do zrobienia
 
-1. `git switch main`, `git pull`, potem nowy branch `feature/tb-1-dane`.
-2. Skopiuj `materialy/dane-szablon.md` jako `docs/dane.md`.
-3. Opis danych: użytkownik, tablica i zadanie, każde z co najmniej 4 informacjami i przykładową wartością; powiązania w co najmniej 3 zdaniach; przykład zadania w JSON.
-4. Na końcu `docs/dane.md` sekcja „Wstępny diagram ERD”: tabele, kolumny z typami, klucze główne (`PK`) i obce (`FK`), powiązania. Diagram w Mermaid albo jako obrazek `docs/erd-szkic.png`.
-5. Usuń z pliku komentarze z pytaniami pomocniczymi.
-6. Dopisz tę część do `docs/zadania/TB-1.md`.
-7. Pull request, zielony workflow, scalenie przez merge commit.
+- Nowy branch `feature/tb-2-api`.
+- `backend/routes/tasks.js` na wzór `routes/boards.js`:
+  - `GET /api/boards/:boardId/tasks` (200, 404),
+  - `GET /api/tasks/:id` (200, 404),
+  - `POST /api/tasks` (201, 400),
+  - `PUT /api/tasks/:id` (200, 400, 404),
+  - `DELETE /api/tasks/:id` – soft delete (204, 404).
+- `backend/routes/users.js` z `GET /api/users` bez pola `passwordHash`.
+- Walidacja: tytuł 3–100 znaków, `status` i `priority` z listy, `deadline` jako `RRRR-MM-DD` albo puste, tablica i osoba muszą istnieć.
+- Kolekcja Postman w `docs/postman/` z przypadkami 400 i 404.
+- Sekcja „Baza danych” w README: tabele, relacje, soft delete, jak odtworzyć bazę.
+- Dopisz tę część do `docs/zadania/TB-2.md`.
 
 ### Gotowe, gdy
 
-- [ ] `docs/dane.md` opisuje użytkownika, tablicę i zadanie z przykładami.
-- [ ] Powiązania są opisane w co najmniej 3 zdaniach i jest przykład zadania w JSON.
-- [ ] Jest wstępny diagram ERD z co najmniej trzema tabelami, kluczami głównymi i obcymi.
-- [ ] Pull request z branchu `feature/tb-1-dane` jest scalony do piątku 18:00.
+- [ ] Wszystkie trasy działają w Postmanie i zwracają właściwe kody.
+- [ ] Usunięte zadanie znika z listy, ale zostaje w bazie z `isDeleted = 1`.
+- [ ] `GET /api/users` nie zwraca `passwordHash`.
+- [ ] Pull request z branchu `feature/tb-2-api` jest scalony do piątku 18:00.
