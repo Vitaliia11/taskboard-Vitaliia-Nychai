@@ -28,3 +28,12 @@
 - [ ] Usunięte zadanie znika z listy, ale zostaje w bazie z `isDeleted = 1`.
 - [ ] `GET /api/users` nie zwraca `passwordHash`.
 - [ ] Pull request z branchu `feature/tb-2-api` jest scalony do piątku 18:00.
+
+## Część 2: API zadań i użytkowników (TB-2)
+
+- Utworzono branch `feature/tb-2-api`.
+- Zaimplementowano endpointy w `backend/routes/tasks.js` oraz `backend/routes/boards.js` (`GET /api/boards/:boardId/tasks`, `GET /api/tasks/:id`, `POST /api/tasks`, `PUT /api/tasks/:id`, `DELETE /api/tasks/:id` z mechanizmem soft delete).
+- Dodano walidację danych wejściowych i weryfikację istnienia rekordów.
+- Utworzono `backend/routes/users.js` z trasą `GET /api/users` z wykluczeniem pola `passwordHash`.
+- Wyeksportowano kolekcję Postman (z testami kodów 400 i 404) do `docs/postman/`.
+- Uzupełniono dokumentację bazy danych w `README.md`.
