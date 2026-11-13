@@ -46,4 +46,17 @@ try {
 
 });
 
+router.get('/boards/:boardId/tasks', async (req, res) => {
+    try {
+        const boardId = req.params.boardId;
+        const [tasks] = await pool.query(
+            'SELECT * FROM tasks WHERE boardId = ? AND isDeleted = 0',
+            [boardId]
+        );
+        res.json(tasks);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 module.exports = router;
