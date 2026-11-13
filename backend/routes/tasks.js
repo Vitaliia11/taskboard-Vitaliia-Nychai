@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
             [title.trim(), description, taskStatus, priority || 'low', deadline || null, boardId, assigneeId || null]
         );
 
-        res.status(201).json({ id: result.insertId, message: 'Utworчено завдання' });
+        res.status(201).json({ id: result.insertId, message: 'Utworiono zadanie' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

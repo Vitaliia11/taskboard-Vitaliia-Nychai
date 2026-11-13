@@ -4,7 +4,7 @@ const db = require('../db');
 
 router.get('/', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM users');
+        const [rows] = await db.query('SELECT id, login, firstName, lastName, createdAt FROM users');
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
