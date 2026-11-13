@@ -51,11 +51,13 @@ Kolekcja zapytań API (format v2.1) znajduje się w folderze projektu pod ście�
 Aplikacja korzysta z relacyjnej bazy danych **MySQL** (`taskboard`).
 
 ### Tabele i relacje
-- **`users`** (`id`, `login`, `passwordHash`, `firstName`, `lastName`, `createdAt`) — przechowuje konta użytkowników.
-- **`boards`** (`id`, `name`, `description`, `ownerId`, `createdAt`, `isDeleted`, `deletedAt`, `deletedById`) — tablice zadań.
-- **`tasks`** (`id`, `title`, `description`, `status`, `priority`, `deadline`, `boardId`, `assigneeId`, `createdAt`, `isDeleted`, `deletedAt`, `deletedById`) — zadania przypisane do tablic.
+
+* **`users`** (`id`, `login`, `passwordHash`, `firstName`, `lastName`, `createdAt`) — przechowuje konta użytkowników.
+* **`boards`** (`id`, `name`, `description`, `ownerId`, `createdAt`, `isDeleted`, `deletedAt`, `deletedById`) — tablice zadań.
+* **`tasks`** (`id`, `title`, `description`, `status`, `priority`, `deadline`, `boardId`, `assigneeId`, `createdAt`, `isDeleted`, `deletedAt`, `deletedById`) — zadania przypisane do tablic.
 
 ### Soft delete
+
 Usunięcie rekordu przez API (`DELETE`) nie usuwa go fizycznie z bazy danych. Ustawiana jest flaga `isDeleted = 1` oraz zapisywany znacznik czasu w `deletedAt`. Zapytania `GET` filtrują wyniki warunkiem `WHERE isDeleted = 0`.
 
 ## Autor
