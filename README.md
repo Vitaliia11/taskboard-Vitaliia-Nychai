@@ -22,9 +22,11 @@ Aplikacja webowa typu TaskBoard przeznaczona do zarządzania projektami i zadani
    git clone <URL_TWOJEGO_REPOZYTORIUM>
 
 ## Testowanie API
+
 * **Postman:** (v2.1)
 
 ## Struktura bazy danych
+
 Baza danych nazywa się `taskboard` i zawiera następujące główne tablice:
 * `tasks` — przechowuje zadania dla tablicy.
 * `boards` — przechowuje informacje o tablicach.
@@ -33,11 +35,13 @@ Baza danych nazywa się `taskboard` i zawiera następujące główne tablice:
 Dostęp do bazy danych został skonfigurowany za pomocą specjalnego użytkownika `taskboard_app` z odpowiednimi uprawnieniami.
 
 ## Endpointy API
+
 * `GET /api/health` — sprawdzenie statusu serwera.
 * `GET /api/tasks` — pobieranie listy zadań.
 * `GET /api/users` — pobieranie listy użytkowników.
 
 ## Dokumentacja Postman
+
 Kolekcja zapytań API (format v2.1) znajduje się w folderze projektu pod ścieżką:
 `docs/postman/`
 
