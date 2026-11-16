@@ -14,3 +14,18 @@ app.get('/api/health',(req, res) => {
 });
 
 app.listen(3000, () => console.log('Serwer: http://localhost:3000'));
+
+const session = require('express-session');
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use('/api/auth',require('./routes/auth'));
+app.use('/api/users',requireAuth, require('./routes/users'));
+app.use('/api/boards',requireAuth, require('./routes/boards'));
+app.use('/api/tasks',requireAuth, require('./routes/tasks'));
+
+app.use(express.static(path.join(__dirname)));
