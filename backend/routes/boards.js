@@ -2,61 +2,95 @@ const express = require('express');
 const pool = require('../db');
 const router = express.Router();
 
-router.get('/', async(req, res, next) =>{
-    try{
-        const[rows] = await pool.query(
-            'SELECT id, name, description, ownerld, createdAt FROM boards WHERE isDeleted=0'
-        );
-        res.json(rows);
-
-    } catch (err){
-        next(err);
-    }
+router.get('/', async (req, res, next) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, name, description, ownerId, createdAt FROM boards WHERE isDeleted = 0'
+    );
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
 });
 
-
-router.post('/', async(req, res, next) =>{
-    try{
-        const name = (req.body.name || '').trim();
-        if (name.length<1|| name.length > 80){
-            return res.status(400).json({error:'Nazwa masi miec od 1 do 80 znakow'});
-        }
-        const ownerld = 1;// do poniedzialku 3 na sztywno, potem z sesji
-        const [result]=await pool.query(
-            'INSERT INTO boards (name, description, ownerld) VALUES (?,?,?)',
-            [name, req.body.description || null, ownerld]
-        );
-        res.status(201).json({id: result.insertld, name});
-    } catch(err) {
-        next(err);
+router.post('/', async (req, res, next) => {
+  try {
+    const name = (req.body.name || '').trim();
+    if (name.length < 1 || name.length > 80) {
+      return res.status(400).json({ error: 'Nazwa musi mieć od 1 do 80 znaków' });
     }
-
-try {
+    const ownerId = req.session.userId; // od poniedziałku 3 z sesji
     const [result] = await pool.query(
-        'UPDATE boards SET isDELETED=1, deletesAt = NOW() WHERE id =? AND isDeleted=0',
-        [req.params.id]
+      'INSERT INTO boards (name, description, ownerId) VALUES (?, ?, ?)',
+      [name, req.body.description || null, ownerId]
     );
-    if (result.affectedRows===0){
-        return res.status(404).json({error: 'Nie znaleziono tablicy'});
+    res.status(201).json({ id: result.insertId, name });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PUT /api/boards/:id – zmiana nazwy i opisu
+router.put('/:id', async (req, res, next) => {
+  try {
+    const name = (req.body.name || '').trim();
+    if (name.length < 1 || name.length > 80) {
+      return res.status(400).json({ error: 'Nazwa musi mieć od 1 do 80 znaków' });
+    }
+    const [result] = await pool.query(
+      'UPDATE boards SET name = ?, description = ? WHERE id = ? AND isDeleted = 0',
+      [name, req.body.description || null, req.params.id]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Nie znaleziono tablicy' });
+    }
+    res.json({ id: Number(req.params.id), name });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// DELETE /api/boards/:id – soft delete
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const [result] = await pool.query(
+      'UPDATE boards SET isDeleted = 1, deletedAt = NOW(), deletedById = ? WHERE id = ? AND isDeleted = 0',
+      [req.session.userId, req.params.id]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Nie znaleziono tablicy' });
     }
     res.status(204).end();
-    }catch(err) {
-        next(err);
-    }
-
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.get('/:boardId/tasks', async (req, res) => {
-    try {
-        const boardId = req.params.boardId;
-        const [tasks] = await pool.query(
-            'SELECT * FROM tasks WHERE boardId = ? AND isDeleted = 0',
-            [boardId]
-        );
-        res.json(tasks);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+// GET /api/boards/:boardId/tasks?priority=high – zadania tablicy z filtrem
+router.get('/:boardId/tasks', async (req, res, next) => {
+  try {
+    const [boards] = await pool.query(
+      'SELECT id FROM boards WHERE id = ? AND isDeleted = 0',
+      [req.params.boardId]
+    );
+    if (boards.length === 0) {
+      return res.status(404).json({ error: 'Nie znaleziono tablicy' });
     }
+    let sql = 'SELECT id, title, status, priority, deadline, assigneeId FROM tasks WHERE boardId = ? AND isDeleted = 0';
+    const params = [req.params.boardId];
+    const { priority } = req.query;
+    if (priority) {
+      if (!['low', 'medium', 'high'].includes(priority)) {
+        return res.status(400).json({ error: 'Nieprawidłowy priorytet' });
+      }
+      sql += ' AND priority = ?';
+      params.push(priority);
+    }
+    const [rows] = await pool.query(sql, params);
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;
