@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablice - TaskBoard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="boards.html">TaskBoard</a>
+            <div class="d-flex">
+                <span id="userName" class="navbar-text me-3">Użytkownik</span>
+                <button id="logoutBtn" class="btn btn-outline-light btn-sm">Wyloguj</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Twoje tablice</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBoardModal">Dodaj tablicę</button>
+        </div>
+
+        <div id="boardsList" class="row">
+            <!-- Тут будуть з'являтися твої дошки -->
+        </div>
+    </div>
+
+    <!-- Модальне вікно для створення дошки -->
+    <div class="modal fade" id="createBoardModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="createBoardForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nowa tablica</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="boardName" class="form-label">Nazwa tablicy</label>
+                            <input type="text" class="form-control" id="boardName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="boardDescription" class="form-label">Opis</label>
+                            <textarea class="form-control" id="boardDescription"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                        <button type="submit" class="btn btn-primary">Utwórz</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/boards.js"></script>
+</body>
+</html>

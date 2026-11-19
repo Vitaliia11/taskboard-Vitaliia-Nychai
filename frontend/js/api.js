@@ -8,7 +8,6 @@ async function api(path, method = 'GET', body){
         window.location.href = 'login.html';
         return new Promise(() => {});
     }
-
     const data = res.status === 204 ? null: await res.json();
     if (!res.ok) {
         throw new Error(data.error);
