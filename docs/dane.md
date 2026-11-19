@@ -36,6 +36,8 @@
 
 ## Przykład zadania w JSON
 
+```json
+
 {
   "id": 101,
   "boardId": 10,
@@ -46,10 +48,15 @@
   "assignee": "Anna Nowak"
 }
 
+```
+
 ## Diagram ERD
 
 ```mermaid
+
 erDiagram
     UZYTKOWNIK ||--o{ TABLICA : tworzy
     TABLICA ||--|{ ZADANIE : zawiera
     UZYTKOWNIK ||--o{ ZADANIE : przypisany
+    
+```
