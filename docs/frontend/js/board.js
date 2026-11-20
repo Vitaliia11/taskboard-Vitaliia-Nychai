@@ -6,6 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     loadBoardDetails();
     loadTasks();
 
+    // Налаштування фільтрів (назва, особа, пріоритет)
+    const filterTitle = document.getElementById('filterTitle');
+    if (filterTitle) {
+        filterTitle.addEventListener('input', loadTasks);
+    }
+
+    const filterPerson = document.getElementById('filterPerson');
+    if (filterPerson) {
+        filterPerson.addEventListener('input', loadTasks);
+    }
+
+    const filterPriority = document.getElementById('filterPriority');
+    if (filterPriority) {
+        filterPriority.addEventListener('change', loadTasks);
+    }
+
     // Обробка форми створення завдання з валідацією
     const taskForm = document.getElementById('taskForm');
     if (taskForm) {
@@ -45,12 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Фільтрація за пріоритетом
-    const filterPriority = document.getElementById('filterPriority');
-    if (filterPriority) {
-        filterPriority.addEventListener('change', loadTasks);
-    }
-
+    
     // Вихід з системи
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
@@ -74,10 +85,19 @@ async function loadBoardDetails() {
     }
 }
 
-// Функція завантаження та виведення завдань у колонки
+// Функція завантаження та виведення завдань у колонки з урахуванням усіх фільтрів
 async function loadTasks() {
-    const priority = document.getElementById('filterPriority').value;
-    const query = priority ? `?priority=${priority}` : '';
+    const priority = document.getElementById('filterPriority') ? document.getElementById('filterPriority').value : '';
+    const title = document.getElementById('filterTitle') ? document.getElementById('filterTitle').value.trim() : '';
+    const person = document.getElementById('filterPerson') ? document.getElementById('filterPerson').value.trim() : '';
+    
+    // Формуємо параметри запиту за допомогою URLSearchParams
+    const params = new URLSearchParams();
+    if (priority) params.append('priority', priority);
+    if (title) params.append('title', title);
+    if (person) params.append('person', person);
+
+    const query = params.toString() ? `?${params.toString()}` : '';
     
     try {
         const tasks = await api(`/boards/${boardId}/tasks${query}`);

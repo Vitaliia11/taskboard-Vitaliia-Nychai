@@ -10,7 +10,7 @@ Poniżej znajduje się tabela tras (endpointów) API dostępnych w aplikacji.
 | GET | `/api/auth/me` | Tak | Pobranie danych aktualnie zalogowanego użytkownika |
 | GET | `/api/boards` | Tak | Pobranie listy wszystkich tablic użytkownika |
 | POST | `/api/boards` | Tak | Utworzenie nowej tablicy |
-| GET | `/api/boards/:boardId/tasks` | Tak | Pobranie zadań dla danej tablicy (obsługuje filtr `?priority=...`) |
+| GET | /api/boards/:boardId/tasks | Tak | Pobranie zadań dla danej tablicy (obsługuje filtry ?priority=..., ?title=..., ?person=...) |
 | POST | `/api/tasks` | Tak | Utworzenie nowego zadania |
 | PATCH | `/api/tasks/:id` | Tak | Aktualizacja zadania (np. zmiana statusu) |
 | DELETE | `/api/tasks/:id` | Tak | Usunięcie zadania (miękkie usunięcie / soft delete) |
