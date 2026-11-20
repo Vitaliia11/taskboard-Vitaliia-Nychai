@@ -3,9 +3,9 @@
 Poniżej przedstawiono przypadki testowe dla aplikacji TaskBoard (zarówno API, jak i interfejs użytkownika).
 
 | ID | Scenariusz | Kroki | Oczekiwany wynik | Wynik |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | T-01 | Logowanie poprawnymi danymi | Wpisanie poprawnego login i hasła w `login.html`, kliknięcie "Zaloguj" | Przejście do strony `boards.html`, kod 200 | Zgodny |
-| T-02 | Logowanie błędním hasłem | Wpisanie złego hasła w `login.html`, kliknięcie "Zaloguj" | Komunikat o błędzie z API (401 Unauthorized) | Zgodny |
+| T-02 | Logowanie błędnym hasłem | Wpisanie złego hasła w `login.html`, kliknięcie "Zaloguj" | Komunikat o błędzie z API (401 Unauthorized) | Zgodny |
 | T-03 | Rejestracja nowego użytkownika | Wypełnienie Formularza w `login.html` (min. 8 znaków hasła) | Utworzenie konta, kod 201 i przekierowanie | Zgodny |
 | T-04 | Rejestracja na zajęty login | Próba rejestracji na login, który już istnieje w bazie | Komunikat o konflikcie (kod 409 Conflict) | Zgodny |
 | T-05 | Próba dostępu do API bez sesji | Wysłanie żądania `GET /api/boards` bez uprzedniego zalogowania | Odpowiedź serwera z kodem 401 Unauthorized | Zgodny |

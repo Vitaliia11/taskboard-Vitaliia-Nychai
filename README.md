@@ -24,11 +24,11 @@ Aplikacja webowa typu TaskBoard przeznaczona do zarządzania projektami i zadani
    ```
 
 2. Skonfiguruj bazę danych:
-   - Utwórz bazę danych MySQL o nazwie `taskboard`.
-   - Zaimportuj pliki struktury i kont początkowych.
+   * Utwórz bazę danych MySQL o nazwie `taskboard`.
+   * Zaimportuj pliki struktury i kont początkowych.
 
 3. Skonfiguruj plik środowiskowy:
-   - W folderze `backend` utwórz plik `.env` na podstawie `.env.example` i uzupełnij dane do bazy oraz klucz `SESSION_SECRET`.
+   * W folderze `backend` utwórz plik `.env` na podstawie `.env.example` i uzupełnij dane do bazy oraz klucz `SESSION_SECRET`.
 
 4. Zainstaluj zależności i uruchom aplikację:
    ```bash
