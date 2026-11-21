@@ -2,6 +2,34 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
+// GET з фільтрами q та assigneeId
+router.get('/', async (req, res) => {
+    try {
+        let query = 'SELECT * FROM tasks WHERE isDeleted = 0';
+        const params = [];
+
+        if (req.query.assigneeId) {
+            const assigneeId = parseInt(req.query.assigneeId, 10);
+            if (isNaN(assigneeId)) {
+                return res.status(400).json({ error: 'Nieprawidłowy assigneeId' });
+            }
+            query += ' AND assigneeId = ?';
+            params.push(assigneeId);
+        }
+
+        if (req.query.q) {
+            query += ' AND (title LIKE ? OR description LIKE ?)';
+            const searchTerm = `%${req.query.q}%`;
+            params.push(searchTerm, searchTerm);
+        }
+
+        const [tasks] = await pool.query(query, params);
+        res.json(tasks);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         const [tasks] = await pool.query(
@@ -56,7 +84,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+// Підтримка і PUT, і PATCH для усунення конфлікту з фронтендом
+const updateTaskHandler = async (req, res) => {
     try {
         const { title, description, status, priority, deadline, assigneeId } = req.body;
         
@@ -80,7 +109,10 @@ router.put('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-});
+};
+
+router.put('/:id', updateTaskHandler);
+router.patch('/:id', updateTaskHandler);
 
 router.delete('/:id', async (req, res) => {
     try {

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const pool = require('../db'); // 1. Додали підключення до бази
+const { requireAuth } = require('../middleware/auth'); // 2. Додали імпорт мідлвара
 
 router.post('/register', async(req, res, next) =>{
     try{
@@ -8,7 +10,7 @@ router.post('/register', async(req, res, next) =>{
         if (!login || !firstName || !lastName || !password || password.length < 8){
             return res.status(400).json({ error:'Uzupełnij wszystkie pola, hasło min.8 znaków'});
         }
-        const[exists] = await pool.query('SELECT id FROM users WHERE login = ?',[login]);
+        const [exists] = await pool.query('SELECT id FROM users WHERE login = ?',[login]);
         if (exists.length > 0){
             return res.status(409).json({ error: 'Ten login jest już zajęty'});
         }
@@ -26,12 +28,15 @@ router.post('/register', async(req, res, next) =>{
 
 router.post('/login', async (req, res, next) => {
     try {
-        const {login, password } = req.body;
+        const { login, password } = req.body;
         const [rows] = await pool.query('SELECT * FROM users WHERE login = ?',[login]);
         const user = rows[0];
-        if (!user || !(await bcrypt.compare(password || ", user.passwordHash"))) {
+        
+        // 3. Виправили синтаксис bcrypt.compare (прибрали зайві кома/лапки)
+        if (!user || !password || !(await bcrypt.compare(password, user.passwordHash))) {
             return res.status(401).json({ error: 'Nieprawidłowy login lub hasło'});
         }
+        
         req.session.userId = user.id;
         res.json({ id: user.id, login: user.login, firstName: user.firstName, lastName: user.lastName});
     } catch (err) {
