@@ -1,6 +1,7 @@
 # TB-3: Dokumentacja API oraz testy
 
 ## Opis wykonania
+
 - Zaimplementowano brakujące endpointy oraz walidację danych wejściowych.
 - Uzupełniono kolekcję Postman o testy z kodami 400 oraz 404.
 - Zaktualizowano dokumentację oraz procedury testowe.
