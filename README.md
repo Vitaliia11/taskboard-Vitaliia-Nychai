@@ -77,6 +77,12 @@ Aplikacja korzysta z relacyjnej bazy danych **MySQL** (`taskboard`).
 
 Usunięcie rekordu przez API (`DELETE`) nie usuwa go fizycznie z bazy danych. Ustawiana jest flaga `isDeleted = 1` oraz zapisywany znacznik czasu w `deletedAt`. Zapytania `GET` filtrują wyniki warunkiem `WHERE isDeleted = 0`.
 
+| Folder / Plik | Opis |
+| --- | --- |
+| `backend/` | Serwer Node.js, Express, routing |
+| `frontend/` | Interfejs użytkownika (HTML, CSS, JS) |
+| `docs/` | Dokumentacja projektu i zadania |
+
 ## Autor
 
 * **Imię i Nazwisko:** VitaliiaNychai
